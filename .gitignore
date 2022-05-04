@@ -1,0 +1,14 @@
+/[Ll]ibrary/
+/[Ll]ogs/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Uu]serSettings/
+
+/.vs/
+/.vscode/
+
+*.vsconfig
+*.csproj
+*.sln
