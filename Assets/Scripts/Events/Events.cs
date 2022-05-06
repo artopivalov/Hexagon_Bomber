@@ -16,5 +16,10 @@ namespace Application
     {
       unityAction?.Invoke();
     }
+
+    public static void TryInvoke(this UnityAction<object> unityAction, object arg)
+    {
+      unityAction?.Invoke(arg);
+    }
   }
 }

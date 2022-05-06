@@ -13,11 +13,8 @@ namespace Application.Managers
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void LoadMethod()
     {
-      Debug.Log("init - ApplicationManager");
-
       foreach(var type in GetInitializationTypes())
       {
-        Debug.Log("init - " + type);
         System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(
           type.TypeHandle
         );
@@ -34,7 +31,7 @@ namespace Application.Managers
       {
         foreach(var type in assembly.GetTypes())
         {
-          if(type.Namespace == "Application.Managers")
+          if(type.Namespace == "Application.Managers" && type.IsAbstract)
           {
             types.Add(type);
           }

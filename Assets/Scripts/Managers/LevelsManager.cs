@@ -1,5 +1,5 @@
 ///
-///
+/// my legacy levels manager
 ///
 using Application.Settings;
 
@@ -47,8 +47,6 @@ namespace Application.Managers
 
     private static void OnPreReset()
     {
-      Debug.Log("reset");
-
       LevelsManager.ResetIndexes();
 
       LevelsManager.isCurrentLevelSucceed = false;
@@ -85,12 +83,16 @@ namespace Application.Managers
       LevelsManager.currentSavedLevelIndex++;
 
       LevelsManager.Save();
+
+      GameStatesManager.ChangeState(GameStates.Succeed);
     }
 
     public static void PerformLevelFailed()
     {
       LevelsManager.isCurrentLevelSucceed = false;
       LevelsManager.isCurrentLevelFinished = true;
+
+      GameStatesManager.ChangeState(GameStates.Lose);
     }
 
     public static void SetCurrentLevelIndex(int level)

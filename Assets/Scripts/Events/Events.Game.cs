@@ -9,6 +9,7 @@ namespace Application
   {
     public static UnityAction PreReset;
     public static UnityAction Reset;
+    public static UnityAction Update;
 
     public static void RequestReset()
     {
