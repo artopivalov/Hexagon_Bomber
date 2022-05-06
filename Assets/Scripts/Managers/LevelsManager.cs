@@ -1,6 +1,8 @@
 ///
 ///
 ///
+using Application.Settings;
+
 using UnityEngine;
 
 namespace Application.Managers
@@ -8,6 +10,7 @@ namespace Application.Managers
   public static partial class LevelsManager
   {
     private const string levelStorageKey = "values.level";
+    private const string levelDataFolder = "Data/Levels";
 
     private static int currentSavedLevelIndex;
     private static int currentLevelIndex;
@@ -17,6 +20,8 @@ namespace Application.Managers
     private static bool isCurrentLevelFinished;
     private static bool isCurrentLevelSucceed;
 
+    private static LevelData[] levelData;
+
     static LevelsManager()
     {
       LevelsManager.Load();
@@ -25,12 +30,13 @@ namespace Application.Managers
 
     private static void Subscribe()
     {
-      Events.OnPreReset += OnPreReset;
+      Events.PreReset += OnPreReset;
     }
 
     private static void Load()
     {
       LevelsManager.currentSavedLevelIndex = PlayerPrefs.GetInt(LevelsManager.levelStorageKey, 1);
+      LevelsManager.levelData = UnityEngine.Resources.LoadAll<LevelData>(levelDataFolder);
     }
 
     private static void Save()
@@ -91,6 +97,21 @@ namespace Application.Managers
     {
       LevelsManager.currentSavedLevelIndex = level;
       LevelsManager.Save();
+    }
+
+    public static LevelData[] GetLevelData()
+    {
+      return LevelsManager.levelData;
+    }
+
+    public static int GetRepeatedLevelIndex()
+    {
+      return (int)UnityEngine.Mathf.Repeat(GetCurrentLevelIndex() - 1, GetLevelData().Length);
+    }
+
+    public static LevelData GetCurrentLevelData()
+    {
+      return LevelsManager.GetLevelData()[LevelsManager.GetRepeatedLevelIndex()];
     }
 
     public static int GetCurrentLevelIndex()

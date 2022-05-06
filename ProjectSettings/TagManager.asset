@@ -14,15 +14,15 @@ TagManager:
   - 
   - 
   - 
+  - Character
+  - Player
+  - Bot
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Interactable
+  - Environment
   - 
   - 
   - 

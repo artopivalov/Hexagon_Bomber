@@ -7,13 +7,13 @@ namespace Application
 {
   public partial class Events
   {
-    public static UnityAction OnPreReset;
-    public static UnityAction OnReset;
+    public static UnityAction PreReset;
+    public static UnityAction Reset;
 
     public static void RequestReset()
     {
-      OnPreReset.TryInvoke();
-      OnReset.TryInvoke();
+      PreReset.TryInvoke();
+      Reset.TryInvoke();
     }
   }
 }
