@@ -9,13 +9,10 @@ namespace Application.Entities
 {
   public class Screen : Presentation
   {
-    protected virtual void Awake()
+    public override void Subscribe()
     {
-      Subscribe();
-    }
+      base.Subscribe();
 
-    protected virtual void Subscribe()
-    {
       Events.GameStateChanged += OnGameStateChanged;
     }
 

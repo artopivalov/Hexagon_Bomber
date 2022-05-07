@@ -36,8 +36,10 @@ namespace Application.Entities
       DeactivateJoystick();
     }
 
-    public void Subscribe()
+    public override void Subscribe()
     {
+      base.Subscribe();
+
       Events.PointerDown += OnPointerDown;
       Events.PointerUp += OnPointerUp;
       Events.PointerMove += OnPointerMove;

@@ -9,8 +9,10 @@ namespace Application.Entities
   {
     protected new UnityEngine.Camera camera;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
+
       camera = GetComponent<UnityEngine.Camera>();
     }
 

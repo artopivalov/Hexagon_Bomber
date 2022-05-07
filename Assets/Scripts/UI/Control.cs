@@ -23,7 +23,6 @@ namespace Application.Entities
       instance = this;
 
       joystick = GetComponentInChildren<Joystick>();
-      joystick.Subscribe();
     }
 
     public override void OnPointerDown(PointerEventData eventData)

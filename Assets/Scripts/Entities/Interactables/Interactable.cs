@@ -7,6 +7,5 @@ namespace Application.Entities
 {
   public class Interactable : Entity
   {
-
   }
 }

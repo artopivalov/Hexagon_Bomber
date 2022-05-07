@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handleRange: 1
-  deadZone: 0.1
+  deadZone: 0.25
   magnetDistance: 0
   container: {fileID: 7859853295346309323}
   handle: {fileID: 9114612367252682295}
