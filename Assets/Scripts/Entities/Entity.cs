@@ -40,5 +40,12 @@ namespace Application.Entities
     {
       Unsubscribe();
     }
+
+    protected virtual void Dispose()
+    {
+      //TODO return to pool
+      gameObject.SetActive(false);
+      GameObject.Destroy(gameObject);
+    }
   }
 }

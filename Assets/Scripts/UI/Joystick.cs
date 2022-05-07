@@ -29,8 +29,10 @@ namespace Application.Entities
     public RectTransform unrestrictedPoint;
     public RectTransform joystickBackground;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+      base.Start();
+
       baseRect = GetComponent<RectTransform>();
 
       DeactivateJoystick();
