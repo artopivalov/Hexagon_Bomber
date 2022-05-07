@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1238940064780386353}
   - component: {fileID: 1238940064780386352}
   - component: {fileID: 998386735338628321}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06918912ddb14e84db0fd62310720f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionTime: 2
 --- !u!1 &1238940064969234470
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +70,7 @@ GameObject:
   - component: {fileID: 1238940064969234471}
   - component: {fileID: 1238940064969234473}
   - component: {fileID: 1238940064969234472}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

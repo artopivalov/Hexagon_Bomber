@@ -18,7 +18,7 @@ namespace Application.Entities
     public int height;
 
     public float offsetX = 1f;
-    public float offsetZ = 1f;
+    public float offsetZ => offsetX * Mathf.Sin(60 * Mathf.Deg2Rad);
 
     protected List<GroundBlock> groundBlockInstances = new List<GroundBlock>();
 

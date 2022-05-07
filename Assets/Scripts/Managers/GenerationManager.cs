@@ -11,6 +11,7 @@ namespace Application.Managers
   public static partial class GenerationManager
   {
     private static Level level;
+    private static GroundGenerator groundGenerator;
 
     static GenerationManager()
     {
@@ -40,6 +41,12 @@ namespace Application.Managers
     {
       var data = LevelsManager.GetCurrentLevelData();
       level = GameObject.Instantiate(data.levelPrefab);
+      groundGenerator = level.GetComponentInChildren<GroundGenerator>();
+    }
+
+    public static float GetGroundBlocksOffset()
+    {
+      return groundGenerator.offsetX;
     }
 
     public static Level GetLevel()
