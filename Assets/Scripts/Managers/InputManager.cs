@@ -19,7 +19,6 @@ namespace Application.Managers
 
     private static void OnUpdate()
     {
-      #if !RELEASE
       if(Input.GetKeyDown(KeyCode.R))
       {
         Events.RequestReset();
@@ -32,7 +31,10 @@ namespace Application.Managers
       {
         LevelsManager.PerformLevelFailed();
       }
-      #endif // !RELEASE
+      if(Input.GetKeyDown(KeyCode.Space))
+      {
+        CharactersManager.GetPlayer().SpawnBomb();
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Application.Entities
 {
-  public class GroundBlock : Interactable
+  public class Bomb : Interactable
   {
 
   }

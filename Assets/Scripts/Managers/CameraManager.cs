@@ -12,7 +12,7 @@ namespace Application.Managers
   {
     private const string pathToCameras = "Prefabs/Camera";
 
-    public static Entities.Camera main;
+    public static CameraMain main;
     public static Entities.Camera ui;
 
     static CameraManager()
@@ -23,7 +23,7 @@ namespace Application.Managers
     private static void InstantiateCameras()
     {
       main = GameObject.Instantiate<Entities.Camera>(
-        Resources.Load<Entities.Camera>(pathToCameras + "/CameraMain"));
+        Resources.Load<Entities.Camera>(pathToCameras + "/CameraMain")) as CameraMain;
       ui = GameObject.Instantiate<Entities.Camera>(
         Resources.Load<Entities.Camera>(pathToCameras + "/CameraUI"));
 

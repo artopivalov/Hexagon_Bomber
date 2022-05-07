@@ -17,6 +17,18 @@ namespace Application.Entities
       previousCollision = null;
     }
 
+    private void OnCollisionStay(Collision collision) // refactor
+    {
+      var entity = collision.collider.GetComponent<Entity>();
+
+      switch(entity)
+      {
+        case GroundBlock groundBlock:
+          OnInteractionWithGroundBlock(groundBlock);
+          break;
+      }
+    }
+
     public virtual void OnInteraction(Collider other)
     {
       var element = other.GetComponent<Entity>();
@@ -47,7 +59,19 @@ namespace Application.Entities
         return;
       }
 
+      switch(interactable)
+      {
+        case GroundBlock groundBlock:
+          OnInteractionWithGroundBlock(groundBlock);
+          break;
+      }
+
       previousCollision = collision;
+    }
+
+    protected virtual void OnInteractionWithGroundBlock(GroundBlock groundBlock)
+    {
+      SetCurrentGroundBlock(groundBlock);
     }
   }
 }

@@ -13,7 +13,7 @@ namespace Application.Entities
     {
       base.Awake();
 
-      camera = GetComponent<UnityEngine.Camera>();
+      camera = GetComponentInChildren<UnityEngine.Camera>();
     }
 
     public UnityEngine.Camera GetCamera()
