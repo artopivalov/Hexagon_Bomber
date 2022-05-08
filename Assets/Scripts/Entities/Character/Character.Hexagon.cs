@@ -36,19 +36,22 @@ namespace Application.Entities
     [SubscribeToMainMethod]
     protected virtual void UpdateHexagon()
     {
-      availableDirections.Clear();
-
-      foreach(var direction in HexagonManager.GetDirections())
+      if(currentGroundBlock != null)
       {
-        var hit = Physics.Raycast(
-          origin: currentGroundBlock.GetPosition() + Vector3.up * 0.5f,
-          direction: direction,
-          maxDistance: GenerationManager.GetGroundBlocksOffset() * 0.8f,
-          layerMask: LayerMask.GetMask("Interactable")
-        );
-        if(!hit)
+        availableDirections.Clear();
+
+        foreach(var direction in HexagonManager.GetDirections())
         {
-          availableDirections.Add(direction);
+          var hit = Physics.Raycast(
+            origin: currentGroundBlock.GetPosition() + Vector3.up * 0.5f,
+            direction: direction,
+            maxDistance: GenerationManager.GetGroundBlocksOffset() * 0.8f,
+            layerMask: LayerMask.GetMask("Interactable")
+          );
+          if(!hit)
+          {
+            availableDirections.Add(direction);
+          }
         }
       }
     }
