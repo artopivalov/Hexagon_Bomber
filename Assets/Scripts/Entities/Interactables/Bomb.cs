@@ -3,6 +3,7 @@
 ///
 using Application.Managers;
 
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
@@ -10,11 +11,15 @@ namespace Application.Entities
 {
   public class Bomb : Interactable, IExplodable
   {
-    protected bool isExploded;
+    [Header("Settings")]
     public float explosionTime = 2f;
 
-    public virtual void Init()
+    protected bool isExploded;
+    protected Character owner;
+
+    public virtual void Init(Character owner)
     {
+      this.owner = owner;
       isExploded = false;
 
       DOTween.Sequence()
@@ -30,34 +35,59 @@ namespace Application.Entities
 
         for(int i = 0; i < 6; i++)
         {
-          var distance = GenerationManager.GetGroundBlocksOffset();
+          var power = owner.GetBombPower();
+          var blocksOffset = GenerationManager.GetGroundBlocksOffset();
+          var distance = blocksOffset * power;
           var direction = Quaternion.Euler(0, 60 * i, 0) * Vector3.left * distance;
 
-          var hited = Physics.Raycast(
+
+          RaycastHit[] hits = Physics.RaycastAll(
             origin: this.GetPosition() + Vector3.up * 0.5f,
             direction: direction,
             maxDistance: distance,
-            layerMask: LayerMask.GetMask("Interactable", "Character"),
-            hitInfo: out RaycastHit hit
+            layerMask: LayerMask.GetMask("Interactable", "Character")
           );
 
-          if(hited)
+          float distanceFactor = -1;
+          if(hits.Length > 0)
           {
-            var iExplodable = hit.collider.GetComponent<IExplodable>();
-            if(iExplodable == null)
+            hits = hits.OrderBy((hit) => Vector3.Distance(hit.transform.position, this.GetPosition())).ToArray();
+            foreach(var hit in hits)
             {
-              iExplodable = hit.collider.GetComponentInParent<IExplodable>();
-            }
+              var wall = hit.collider.TryFindInParent<Wall>();
+              if(wall != null)
+              {
+                var distanceToCollider = Vector3.Distance(hit.transform.position, this.GetPosition());
+                distanceFactor = 
+                  (distanceToCollider - blocksOffset) / blocksOffset / power;
+                break;
+              }
 
-            if(iExplodable != null)
-            {
-              iExplodable.Explode();
+              var iExplodable = hit.collider.TryFindInParent<IExplodable>();
+              if(iExplodable != null)
+              {
+                iExplodable.Explode();
+              }
             }
           }
+
+          CreateExplosionEffect(
+            this.GetPosition() 
+            + (direction * (distanceFactor >= 0 ? distanceFactor : 1)) 
+            + direction.normalized * 0.4f
+          );
         }
       }
 
       isExploded = true;
+    }
+
+    protected virtual void CreateExplosionEffect(Vector3 targetPosition)
+    {
+      var offset = Vector3.up * 0.5f;
+      var newEffect = PoolsManager.CreateElement<ExplosionLine>();
+      newEffect.SetPosition(this.GetPosition() + offset);
+      newEffect.SetTargetPosition(targetPosition + offset);
     }
   }
 }

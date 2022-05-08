@@ -42,10 +42,18 @@ namespace Application.Managers
     {
       foreach(var entity in instances)
       {
-        GameObject.Destroy(entity.gameObject);
+        if(entity != null)
+        {
+          GameObject.Destroy(entity.gameObject);
+        }
       }
 
       instances.Clear();
+    }
+
+    public static T CreateElement<T>() where T : Entity
+    {
+      return CreateElement(typeof(T)) as T;
     }
 
     public static Entity CreateElement(Type type)

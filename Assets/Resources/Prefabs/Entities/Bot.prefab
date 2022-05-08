@@ -10,15 +10,15 @@ PrefabInstance:
     - target: {fileID: 584302050, guid: 0494138feebbc9d42a10bf21f97c8013, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2598be73074138447abfc52bb8ee5860, type: 2}
+      objectReference: {fileID: 2100000, guid: 85ab668aba8adad43944a8ab46d50fbc, type: 2}
     - target: {fileID: 42710751301938892, guid: 0494138feebbc9d42a10bf21f97c8013, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Bot
       objectReference: {fileID: 0}
     - target: {fileID: 4476853559016839291, guid: 0494138feebbc9d42a10bf21f97c8013, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2598be73074138447abfc52bb8ee5860, type: 2}
+      objectReference: {fileID: 2100000, guid: 85ab668aba8adad43944a8ab46d50fbc, type: 2}
     - target: {fileID: 4551764877114102798, guid: 0494138feebbc9d42a10bf21f97c8013, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -70,7 +70,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 42710751301938892, guid: 0494138feebbc9d42a10bf21f97c8013, type: 3}
   m_PrefabInstance: {fileID: 8645126437490829590}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7571807109217666921
+--- !u!114 &7514009420731964950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,6 +79,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8605839591939475418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c6fb6bb7808354a925e4ad0b4db40a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ceb13b9ed492ba42a88a1829aa2e5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

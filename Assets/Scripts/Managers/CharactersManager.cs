@@ -6,12 +6,14 @@ using Application;
 
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace Application.Managers
 {
   public static partial class CharactersManager
   {
     private static Player player;
+    private static List<Character> aliveBots = new List<Character>();
 
     static CharactersManager()
     {
@@ -22,11 +24,12 @@ namespace Application.Managers
     {
       Events.PreReset += OnPreReset;
       Events.PostReset += OnPostReset;
+      Events.CharacterDied += OnCharacterDied;
     }
 
     private static void OnPreReset()
     {
-      
+      aliveBots.Clear();
     }
 
     private static void OnPostReset()
@@ -35,6 +38,23 @@ namespace Application.Managers
       foreach(var spawner in allSpawners)
       {
         CreateCharacter(spawner);
+      }
+    }
+
+    private static void OnCharacterDied(Character character)
+    {
+      switch(character)
+      {
+        case Player player:
+          LevelsManager.PerformLevelFinish(false);
+          break;
+        case Bot bot:
+          aliveBots.Remove(bot);
+          if(aliveBots.Count <= 0)
+          {
+            LevelsManager.PerformLevelFinish(true);
+          }
+          break;
       }
     }
 
@@ -49,6 +69,11 @@ namespace Application.Managers
         player = character as Player;
         Events.PlayerSpawned.TryInvoke();
       }
+      else
+      {
+        aliveBots.Add(character);
+      }
+      Events.CharacterSpawned.TryInvoke();
 
       return character;
     }
