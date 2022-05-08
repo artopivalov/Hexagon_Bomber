@@ -33,7 +33,7 @@ namespace Application.Managers
       }
       if(Input.GetKeyDown(KeyCode.Space))
       {
-        CharactersManager.GetPlayer().SpawnBomb();
+        CharactersManager.GetPlayer()?.SpawnBomb();
       }
     }
   }

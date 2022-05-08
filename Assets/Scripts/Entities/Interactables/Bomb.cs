@@ -16,21 +16,30 @@ namespace Application.Entities
 
     protected bool isExploded;
     protected Character owner;
+    protected Sequence explosion;
 
     public virtual void Init(Character owner)
     {
       this.owner = owner;
       isExploded = false;
 
-      DOTween.Sequence()
+      explosion = DOTween.Sequence()
         .AppendInterval(explosionTime)
         .AppendCallback(Explode);
+    }
+
+    protected override void OnDisable()
+    {
+      base.OnDisable();
+
+      explosion?.Kill();
     }
 
     public virtual void Explode()
     {
       if(!isExploded)
       {
+        owner.OnBombExploded(this);
         Dispose();
 
         for(int i = 0; i < 6; i++)
@@ -40,11 +49,10 @@ namespace Application.Entities
           var distance = blocksOffset * power;
           var direction = Quaternion.Euler(0, 60 * i, 0) * Vector3.left * distance;
 
-
           RaycastHit[] hits = Physics.RaycastAll(
-            origin: this.GetPosition() + Vector3.up * 0.5f,
+            origin: this.GetPosition() + Vector3.up * 0.5f - direction.normalized,
             direction: direction,
-            maxDistance: distance,
+            maxDistance: distance + 1,
             layerMask: LayerMask.GetMask("Interactable", "Character")
           );
 

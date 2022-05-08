@@ -5,25 +5,45 @@ using Application.Attributes;
 using Application.Managers;
 
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.Entities
 {
   public partial class Character
   {
-    protected float bombPower = 2;
+    protected List<Bomb> spawnedBombs = new List<Bomb>();
+
+    [SubscribeToMainMethod]
+    protected virtual void ResetBombs()
+    {
+      spawnedBombs.Clear();
+    }
 
     public virtual void SpawnBomb()
     {
-      var newBomb = PoolsManager.CreateElement(typeof(Bomb)) as Bomb;
+      if(IsBombSpawnAvaiable())
+      {
+        var newBomb = PoolsManager.CreateElement(typeof(Bomb)) as Bomb;
 
-      newBomb.Init(this);
-      newBomb.SetPosition(currentGroundBlock.GetPosition());
-      newBomb.SetPositionY(this.GetPositionY());
+        newBomb.Init(this);
+        newBomb.SetPosition(currentGroundBlock.GetPosition());
+        newBomb.SetPositionY(this.GetPositionY());
+        spawnedBombs.Add(newBomb);
+      }
     }
 
-    public float GetBombPower()
+    protected virtual bool IsBombSpawnAvaiable()
     {
-      return bombPower;
+      bool isCountAllow = spawnedBombs.Count < maxBombsCount;
+      bool isSlotEmpty = spawnedBombs.All((bomb) => 
+      Vector3.Distance(this.GetPosition(), bomb.GetPosition()) > GenerationManager.GetGroundBlocksOffset() * 0.6f);
+      return isCountAllow && isSlotEmpty;
+    }
+
+    public virtual void OnBombExploded(Bomb bomb)
+    {
+      spawnedBombs.Remove(bomb);
     }
   }
 }

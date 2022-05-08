@@ -64,6 +64,9 @@ namespace Application.Entities
         case GroundBlock groundBlock:
           OnInteractionWithGroundBlock(groundBlock);
           break;
+        case Bonus bonus:
+          OnInteractionWithBonus(bonus);
+          break;
       }
 
       previousCollision = collision;
@@ -72,6 +75,30 @@ namespace Application.Entities
     protected virtual void OnInteractionWithGroundBlock(GroundBlock groundBlock)
     {
       SetCurrentGroundBlock(groundBlock);
+    }
+
+    protected virtual void OnInteractionWithBonus(Bonus bonus)
+    {
+      bonus.Dispose();
+      switch(bonus)
+      {
+        case BonusPower bonusPower:
+          OnInteractionWithBonusPower(bonusPower);
+          break;
+        case BonusCount bonusCount:
+          OnInteractionWithBonusCount(bonusCount);
+          break;
+      }
+    }
+
+    protected virtual void OnInteractionWithBonusPower(BonusPower bonusPower)
+    {
+      UpgradePower();
+    }
+
+    protected virtual void OnInteractionWithBonusCount(BonusCount bonusCount)
+    {
+      UpgradeCount();
     }
   }
 }

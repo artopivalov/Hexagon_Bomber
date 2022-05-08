@@ -46,6 +46,7 @@ namespace Application.Managers
       switch(character)
       {
         case Player player:
+          CharactersManager.player = null;
           LevelsManager.PerformLevelFinish(false);
           break;
         case Bot bot:
