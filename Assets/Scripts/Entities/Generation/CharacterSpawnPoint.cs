@@ -14,7 +14,8 @@ namespace Application.Entities
     public enum CharacterType
     {
       Player,
-      Bot,
+      BotStupid,
+      BotSmart,
     }
 
     [Header("Settings")]

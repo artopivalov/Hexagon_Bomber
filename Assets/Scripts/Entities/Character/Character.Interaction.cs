@@ -49,6 +49,9 @@ namespace Application.Entities
         case Interactable interactable:
           InteractionWithInteractable(interactable, collision);
           break;
+        case Character character:
+          OnInteractionWithCharacter(character);
+          break;
       }
     }
 
@@ -70,6 +73,11 @@ namespace Application.Entities
       }
 
       previousCollision = collision;
+    }
+
+    protected virtual void OnInteractionWithCharacter(Character character)
+    {
+
     }
 
     protected virtual void OnInteractionWithGroundBlock(GroundBlock groundBlock)

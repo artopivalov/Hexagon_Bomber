@@ -21,8 +21,6 @@ namespace Application.Entities
       public virtual void Reset() { }
 
       public virtual void GameStarted() { }
-      public virtual void Subscribe() { }
-      public virtual void Unsubscribe() { }
 
       public abstract void Update();
     }

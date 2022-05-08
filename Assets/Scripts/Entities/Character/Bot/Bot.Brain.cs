@@ -12,8 +12,12 @@ namespace Application.Entities
   {
     protected BotBrain currentBrain;
 
-    [SubscribeToMainMethod]
-    protected virtual void InitBrain()
+    public virtual void InitBrainSmart()
+    {
+      currentBrain = new BotBrainSmart().Init(this);
+    }
+
+    public virtual void InitBrainStupid()
     {
       currentBrain = new BotBrainStupid().Init(this);
     }
@@ -21,21 +25,19 @@ namespace Application.Entities
     [SubscribeToMainMethod]
     protected virtual void ResetBrain()
     {
-      currentBrain.Reset();
+      currentBrain?.Reset();
     }
 
     [SubscribeToMainMethod]
     protected virtual void SubscribeBrain()
     {
-      currentBrain.Subscribe();
-
       Events.GameStateChanged += OnGameStateChanged;
     }
 
     [SubscribeToMainMethod]
     protected virtual void UnsubscribeBrain()
     {
-      currentBrain.Unsubscribe();
+      Events.GameStateChanged -= OnGameStateChanged;
     }
 
     protected virtual void OnGameStateChanged()

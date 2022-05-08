@@ -74,6 +74,15 @@ namespace Application.Managers
       }
       else
       {
+        switch(characterSpawnPoint.characterType)
+        {
+          case CharacterSpawnPoint.CharacterType.BotSmart:
+            (character as Bot).InitBrainSmart();
+            break;
+          case CharacterSpawnPoint.CharacterType.BotStupid:
+            (character as Bot).InitBrainStupid();
+            break;
+        }
         aliveBots.Add(character);
       }
       Events.CharacterSpawned.TryInvoke();
@@ -87,10 +96,9 @@ namespace Application.Managers
       {
         case CharacterSpawnPoint.CharacterType.Player:
           return typeof(Player);
-        case CharacterSpawnPoint.CharacterType.Bot:
+        default:
           return typeof(Bot);
       }
-      return typeof(MonoBehaviour);
     }
 
     public static Player GetPlayer()

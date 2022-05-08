@@ -11,6 +11,11 @@ namespace Application.Entities
   {
     public void Explode()
     {
+      Die();
+    }
+
+    protected virtual void Die()
+    {
       Events.CharacterDied?.Invoke(this);
       Dispose();
     }
