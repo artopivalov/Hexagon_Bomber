@@ -52,6 +52,11 @@ namespace Application.Entities
       return joystick;
     }
 
+    public static bool IsPointerDown()
+    {
+      return instance.isPointerDown;
+    }
+
     protected virtual void Update()
     {
       if(isPointerDown)
