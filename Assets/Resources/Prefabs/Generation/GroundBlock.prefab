@@ -139,3 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1a38d39b57372418f185571943309b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallReference: {fileID: 3221811060797210609, guid: df6f2a87982feda4681a8c8ced06f95a, type: 3}
+  breakableReference: {fileID: 8371290671169720917, guid: 3bffd53841cae024baf2cb3a2fe17ce8, type: 3}
+  characterSpawnPoint: {fileID: 5587619704532573291, guid: 5b3fafb94ff2ddd44a9037d4750ec2d8, type: 3}

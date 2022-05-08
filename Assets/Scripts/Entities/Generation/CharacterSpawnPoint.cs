@@ -17,6 +17,17 @@ namespace Application.Entities
       Bot,
     }
 
+    [Header("Settings")]
     public CharacterType characterType;
+
+    [Space(10)]
+    public GameObject debugView;
+
+    protected override void OnEnable()
+    {
+      base.OnEnable();
+
+      debugView.SetActive(false);
+    }
   }
 }

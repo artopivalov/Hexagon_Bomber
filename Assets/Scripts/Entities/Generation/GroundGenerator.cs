@@ -11,7 +11,6 @@ namespace Application.Entities
   {
     [Header("References")]
     public GroundBlock groundReference;
-    public Wall wallReference;
 
     [Header("Settings")]
     public int width;
@@ -19,6 +18,7 @@ namespace Application.Entities
 
     public float offsetX = 1f;
     public float offsetZ => offsetX * Mathf.Sin(60 * Mathf.Deg2Rad);
+    public bool fillEmpty;
 
     protected List<GroundBlock> groundBlockInstances = new List<GroundBlock>();
 
@@ -42,19 +42,16 @@ namespace Application.Entities
 
           if(i == 0 || i == height -1 || j == 0 || j == width - (1 - i % 2))
           {
-            SpawnWall(newBlock);
+            newBlock.SpawnWall();
+          }
+          else if(fillEmpty)
+          {
+            newBlock.SpawnBreakableWall();
           }
 
           groundBlockInstances.Add(newBlock);
         }
       }
-    }
-
-    protected virtual void SpawnWall(GroundBlock parentBlock)
-    {
-      var newWall = UnityEditor.PrefabUtility.InstantiatePrefab(wallReference) as Wall;
-      newWall.transform.SetParent(parentBlock.transform);
-      newWall.transform.localPosition = Vector3.zero;
     }
 
     protected void ClearData()
