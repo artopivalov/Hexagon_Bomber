@@ -17,13 +17,16 @@ namespace Application.Entities
     {
       var direction = GetNearestDirection(targetDirection, availableDirections);
 
-      if(Vector3.Angle(direction, targetDirection) > angleTreshold)
+      if(GetCurrentGroundBlock() != null)
       {
-        StopMovement();
-      }
-      else
-      {
-        SetWayPoint(GetCurrentGroundBlock().GetPosition() + direction * GenerationManager.GetGroundBlocksOffset());
+        if(Vector3.Angle(direction, targetDirection) > angleTreshold)
+        {
+          StopMovement();
+        }
+        else
+        {
+          SetWayPoint(GetCurrentGroundBlock().GetPosition() + direction * GenerationManager.GetGroundBlocksOffset());
+        }
       }
     }
 

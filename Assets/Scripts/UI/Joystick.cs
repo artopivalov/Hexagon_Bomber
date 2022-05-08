@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Application.Entities
 {
+  //TODO multitouch
   public class Joystick : Entity
   {
     private UnityEngine.Camera targetCamera => CameraManager.ui.GetCamera();

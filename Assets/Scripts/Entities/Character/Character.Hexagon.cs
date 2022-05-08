@@ -46,7 +46,8 @@ namespace Application.Entities
             origin: currentGroundBlock.GetPosition() + Vector3.up * 0.5f,
             direction: direction,
             maxDistance: GenerationManager.GetGroundBlocksOffset() * 0.8f,
-            layerMask: LayerMask.GetMask("Interactable")
+            layerMask: LayerMask.GetMask("Interactable"),
+            queryTriggerInteraction: (this is Player) ?  QueryTriggerInteraction.Ignore : QueryTriggerInteraction.Collide
           );
           if(!hit)
           {

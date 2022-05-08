@@ -53,7 +53,8 @@ namespace Application.Entities
             origin: this.GetPosition() + Vector3.up * 0.5f - direction.normalized,
             direction: direction,
             maxDistance: distance + 1,
-            layerMask: LayerMask.GetMask("Interactable", "Character")
+            layerMask: LayerMask.GetMask("Interactable", "Character"),
+            queryTriggerInteraction: QueryTriggerInteraction.Collide
           );
 
           float distanceFactor = -1;

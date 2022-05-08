@@ -13,5 +13,10 @@ namespace Application.Entities
     {
       return GameStates.Game;
     }
+
+    public virtual void OnBombButtonClicked()
+    {
+      CharactersManager.GetPlayer()?.SpawnBomb();
+    }
   }
 }
