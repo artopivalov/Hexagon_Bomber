@@ -12,10 +12,9 @@ namespace Application.Entities
     protected override void Awake()
     {
       this.controller = new PartialController(this);
+      this.controller.InvokeMethods(SubscribeSettings.Init);
 
       base.Awake();
-
-      this.controller.InvokeMethods(SubscribeSettings.Init);
     }
 
     protected override void Start()

@@ -11,6 +11,7 @@ namespace Application
   {
     public static UnityAction CharacterSpawned;
     public static UnityAction<Character> CharacterDied;
+    public static UnityAction AllCharacterSpawned;
 
     public static UnityAction PlayerSpawned;
   }

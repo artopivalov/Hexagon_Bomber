@@ -14,8 +14,6 @@ namespace Application.Entities
     public BreakableWall breakableReference;
     public CharacterSpawnPoint characterSpawnPoint;
 
-    protected Entity instance;
-
     public virtual void SpawnWall()
     {
       ClearContent();
@@ -36,7 +34,7 @@ namespace Application.Entities
 
     protected virtual void SpawnEntity(Entity reference)
     {
-      instance = UnityEditor.PrefabUtility.InstantiatePrefab(reference) as Entity;
+      var instance = UnityEditor.PrefabUtility.InstantiatePrefab(reference) as Entity;
       instance.transform.SetParent(this.transform);
       instance.transform.localPosition = Vector3.zero;
 
@@ -45,11 +43,15 @@ namespace Application.Entities
 
     public virtual void ClearContent()
     {
-      if(instance != null)
+      if(transform.childCount > 1)
       {
-        GameObject.DestroyImmediate(instance.gameObject);
-        UnityEditor.EditorUtility.SetDirty(this);
-      }  
+        var instance = transform.GetChild(1).GetComponent<Entity>();
+        if(instance != null)
+        {
+          GameObject.DestroyImmediate(instance.gameObject);
+          UnityEditor.EditorUtility.SetDirty(this);
+        }
+      }
     }
   }
 }

@@ -56,7 +56,7 @@ namespace Application.Entities
 
         SetMovementDirection(moveDirection.normalized);
 
-        if(moveDirection.magnitude < 0.5f)
+        if(moveDirection.magnitude < 0.1f)
         {
           wayPoints.RemoveAt(0);
           if(wayPoints.Count == 0)

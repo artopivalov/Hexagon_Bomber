@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Application.Entities
 {
-  public static partial class EntityExtensions
+  public static partial class Extensions
   {
     public static T TryFindInParent<T>(this Collider collider)
     {

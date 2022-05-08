@@ -42,12 +42,12 @@ namespace Application.Entities
         owner.OnBombExploded(this);
         Dispose();
 
-        for(int i = 0; i < 6; i++)
+        foreach(var dir in HexagonManager.GetDirections())
         {
           var power = owner.GetBombPower();
           var blocksOffset = GenerationManager.GetGroundBlocksOffset();
           var distance = blocksOffset * power;
-          var direction = Quaternion.Euler(0, 60 * i, 0) * Vector3.left * distance;
+          var direction = dir * distance;
 
           RaycastHit[] hits = Physics.RaycastAll(
             origin: this.GetPosition() + Vector3.up * 0.5f - direction.normalized,
@@ -66,7 +66,7 @@ namespace Application.Entities
               if(wall != null)
               {
                 var distanceToCollider = Vector3.Distance(hit.transform.position, this.GetPosition());
-                distanceFactor = 
+                distanceFactor =
                   (distanceToCollider - blocksOffset) / blocksOffset / power;
                 break;
               }
@@ -80,8 +80,8 @@ namespace Application.Entities
           }
 
           CreateExplosionEffect(
-            this.GetPosition() 
-            + (direction * (distanceFactor >= 0 ? distanceFactor : 1)) 
+            this.GetPosition()
+            + (direction * (distanceFactor >= 0 ? distanceFactor : 1))
             + direction.normalized * 0.4f
           );
         }

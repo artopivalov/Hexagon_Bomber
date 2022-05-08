@@ -39,6 +39,8 @@ namespace Application.Managers
       {
         CreateCharacter(spawner);
       }
+
+      Events.AllCharacterSpawned.TryInvoke();
     }
 
     private static void OnCharacterDied(Character character)
@@ -94,6 +96,11 @@ namespace Application.Managers
     public static Player GetPlayer()
     {
       return player;
+    }
+
+    public static List<Character> GetBots()
+    {
+      return aliveBots;
     }
   }
 }
